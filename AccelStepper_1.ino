@@ -1,11 +1,3 @@
-//#include <AccelStepper.h>
-//#include <MultiStepper.h>
-
-/*   
- *   Basic example code for controlling a stepper with the AccelStepper library
- *      
- *   by Dejan, https://howtomechatronics.com
- */
 
 #include <AccelStepper.h>
 
@@ -79,99 +71,9 @@ int readInt(void){
 
 void loop() {
    char dummy=0;
-  /*
-  int test1 =0;
-  int test2 =0;
- 
-  int a=0;
-  while(1){
-  // if there's any serial available, read it:
-  if(a==0){
-Serial.println("debug0");
-  }
-  a=1;
-  while (Serial.available() > 0) {
-    a=0;
-Serial.println("debug1");
-    
-    // look for the next valid integer in the incoming serial stream:
-
-
-    int red = Serial.parseInt();
-
-Serial.println("debug2");
-    // do it again:
-
-
-    int green = Serial.parseInt();
-
-Serial.println("debug3");
-    // do it again:
-
-
-    int blue = Serial.parseInt();
-Serial.println("debug4");
-
-    // look for the newline. That's the end of your sentence:
-
-
-    if (Serial.read() == '\n') {
-
-      // constrain the values to 0 - 255 and invert
-
-
-      // if you're using a common-cathode LED, just use "constrain(color, 0, 255);"
-
-
-  
-
-  
-      // print the three numbers in one string as hexadecimal:
-
-
-      Serial.println(red, DEC);
-
-
-      Serial.println(green, DEC);
-
-
-      Serial.println(blue, DEC);
-
-
-    }
-  }
-//--
-  }
-
-  int old_startX =0;
-  Serial.println("Set X start pos value +/-32767 ");
-  old_startX = startX;
-  startX = readInt();
-  while(X_start_set_OK != 1){
-  while(stepper3.run()){check_and_stop();};
-  stepper3.moveTo(startX);
-  while(stepper3.run()){check_and_stop();};
-  Serial.println("Is this position OK then set 0 else type new value +/-32767 ");
-  
-  dummy = Serial.read();
-  Serial.print("char :");
-  Serial.println(dummy, DEC);
-  old_startX = startX;
-  tempx = readInt();
-  if(tempx==0){
-    X_start_set_OK=1;
-  }
-  else{
-    startX=tempx;
-  }
-  check_and_stop();
-  }
-  dummy = Serial.read();
-  Serial.println("X pos is now set to :");
-  Serial.print(startX);
-  Serial.println();
-  */
-
+   Serial.println("");
+  Serial.println("Aluminium folding robot ");
+   Serial.println("");
   for(int i=0;i<p_step;i++){
     Serial.print("Set programming X, Y point number :");
     Serial.print(i);
@@ -322,95 +224,6 @@ Serial.println("Programming is done!");
     stepper1.moveTo(godata_Y[0]);
     while(stepper1.run()){check_and_stop();};
     Serial.println("Start");
-/*
-    
- for(int i=0;i<r_step;i++){
-  switch(i){
-  case 0:
-    while(stepper2.run()){check_and_stop();};
-    stepper2.moveTo(godata_Z[0]);
-    while(stepper2.run()){check_and_stop();};
-    while(stepper3.run()){check_and_stop();};
-    stepper3.moveTo(godata_X[0]);
-    while(stepper3.run()){check_and_stop();};
-    while(stepper1.run()){check_and_stop();};
-    stepper1.moveTo(godata_Y[0]);
-    while(stepper1.run()){check_and_stop();};
-  break;
-  case 1:
-    while(stepper3.run()){check_and_stop();};
-    stepper3.moveTo(godata_X[1]);
-    while(stepper3.run()){check_and_stop();};
-  break;
-  case 2:
-    while(stepper1.run()){check_and_stop();};
-    stepper1.moveTo(godata_Y[1]);
-    while(stepper1.run()){check_and_stop();};
-  break;
-  case 3:
-    while(stepper1.run()){check_and_stop();};
-    stepper1.moveTo(godata_Y[0]);
-    while(stepper1.run()){check_and_stop();};
-  
-  break;
-  case 4:
-    while(stepper2.run()){check_and_stop();};
-    stepper2.moveTo(godata_Z[1]);
-    while(stepper2.run()){check_and_stop();};
-   
-  break;
-  case 5:
-
-    while(stepper3.run()){check_and_stop();};
-    stepper3.moveTo(godata_X[0]);
-    while(stepper3.run()){check_and_stop();};
-  
-  break;
-  case 6:
-    while(stepper2.run()){check_and_stop();};
-    stepper2.moveTo(godata_Z[2]);
-    while(stepper2.run()){check_and_stop();};
-  
-  break;
-  case 7:
-    while(stepper1.run()){check_and_stop();};
-    stepper1.moveTo(godata_Y[2]);
-    while(stepper1.run()){check_and_stop();};
-
-    while(stepper3.run()){check_and_stop();};
-    stepper3.moveTo(godata_X[3]);
-    while(stepper3.run()){check_and_stop();};
-
-    while(stepper1.run()){check_and_stop();};
-    stepper1.moveTo(godata_Y[4]);
-    while(stepper1.run()){check_and_stop();};
-
-    while(stepper2.run()){check_and_stop();};
-    stepper2.moveTo(godata_Z[0]);
-    while(stepper2.run()){check_and_stop();};
-
-    while(stepper1.run()){check_and_stop();};
-    stepper1.moveTo(godata_Y[3]);
-    while(stepper1.run()){check_and_stop();};
-
-
-  break;
-  case 8:
-     while(stepper3.run()){check_and_stop();};
-     stepper3.moveTo(godata_X[0]);
-      while(stepper3.run()){check_and_stop();};
-   while(stepper1.run()){check_and_stop();};
-    stepper1.moveTo(godata_Y[0]);
-    while(stepper1.run()){check_and_stop();};
-  
-  break;
-
-  
-  default:
-  break;
-  }
-  }
-  */
 
   
  
@@ -503,9 +316,6 @@ Serial.println("Programming is done!");
     stepper1.moveTo(godata_Y[8]);
     while(stepper1.run()){check_and_stop();};
 
- //   while(stepper2.run()){check_and_stop();};
- //   stepper2.moveTo(godata_Z[0]);
- //   while(stepper2.run()){check_and_stop();};
 
     while(stepper1.run()){check_and_stop();};
     stepper1.moveTo(godata_Y[9]);
@@ -515,81 +325,10 @@ Serial.println("Programming is done!");
     stepper3.moveTo(godata_X[9]);
     while(stepper3.run()){check_and_stop();};
 
-//    while(stepper2.run()){check_and_stop();};
-//  stepper2.moveTo(godata_Z[2]);
-//    while(stepper2.run()){check_and_stop();};
-
 
     
     }
- // stepper1.setSpeed((analogRead(A0));
-  // Step the motor with a constant speed previously set by setSpeed();
-  //  stepper1.moveTo(-stepper1.currentPosition());
- 
-  // run() returns true as long as the final position 
-  //    has not been reached and speed is not 0.
 
-  
-  /*
-  int i=0;
-  while(stepper3.run()){};
-  stepper3.moveTo(0);
-  while(stepper3.run()){};
-  
-  while(stepper1.run()){};
-  stepper1.moveTo(-2000);
-  while(stepper1.run()){};
-  
-  while(stepper3.run()){};
-  stepper3.moveTo(2000);
-  while(stepper3.run()){};
-
-  while(stepper1.run()){};
-  stepper1.moveTo(2000);
-  while(stepper1.run()){};
- */
- 
-
-  
 
   
 }
-
-
-/*   
- *   Basic example code for controlling a stepper without library
- *      
- *   by Dejan, https://howtomechatronics.com
- */
-/*
-// defines pins
-#define stepPin 2
-#define dirPin 5 
- 
-void setup() {
-  // Sets the two pins as Outputs
-  pinMode(stepPin,OUTPUT); 
-  pinMode(dirPin,OUTPUT);
-}
-void loop() {
-  digitalWrite(dirPin,HIGH); // Enables the motor to move in a particular direction
-  // Makes 200 pulses for making one full cycle rotation
-  for(int x = 0; x < 800; x++) {
-    digitalWrite(stepPin,HIGH); 
-    delayMicroseconds(700);    // by changing this time delay between the steps we can change the rotation speed
-    digitalWrite(stepPin,LOW); 
-    delayMicroseconds(700); 
-  }
-  delay(1000); // One second delay
-  
-  digitalWrite(dirPin,LOW); //Changes the rotations direction
-  // Makes 400 pulses for making two full cycle rotation
-  for(int x = 0; x < 1600; x++) {
-    digitalWrite(stepPin,HIGH);
-    delayMicroseconds(500);
-    digitalWrite(stepPin,LOW);
-    delayMicroseconds(500);
-  }
-  delay(1000);
-}
-*/
