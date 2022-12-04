@@ -12,7 +12,7 @@ void setup() {
   stepper1.setAcceleration(10000.0);
   stepper1.moveTo(0);
   stepper2.setMaxSpeed(4000);
-  stepper2.setAcceleration(10000.0);
+  stepper2.setAcceleration(3000.0);
   stepper2.moveTo(0);
   stepper3.setMaxSpeed(4000);
   stepper3.setAcceleration(10000.0);
@@ -234,6 +234,10 @@ Serial.println("Programming is done!");
  
   while(1){
     Serial.println("Start");
+    while(stepper2.run()){check_and_stop();};
+    stepper2.moveTo(godata_Z[0]);
+    while(stepper2.run()){check_and_stop();};
+
     while(stepper3.run()){check_and_stop();};
     stepper3.moveTo(godata_X[0]);
     while(stepper3.run()){check_and_stop();};
@@ -246,24 +250,20 @@ Serial.println("Programming is done!");
     stepper3.moveTo(godata_X[1]);
     while(stepper3.run()){check_and_stop();};
     
-    while(stepper2.run()){check_and_stop();};
-    stepper2.moveTo(godata_Z[1]);
-    while(stepper2.run()){check_and_stop();};
-
     Serial.print("godata_Y[1] ");
-     Serial.println(godata_Y[1]);
+    Serial.println(godata_Y[1]);
     while(stepper1.run()){check_and_stop();};
     stepper1.moveTo(godata_Y[1]);
     while(stepper1.run()){check_and_stop();};
     Serial.print("godata_Y[2] ");
-     Serial.println(godata_Y[2]);
+    Serial.println(godata_Y[2]);
     
     while(stepper1.run()){check_and_stop();};
     stepper1.moveTo(godata_Y[2]);
     while(stepper1.run()){check_and_stop();};
 
     while(stepper2.run()){check_and_stop();};
-    stepper2.moveTo(godata_Z[0]);
+    stepper2.moveTo(godata_Z[1]);
     while(stepper2.run()){check_and_stop();};
 
     while(stepper1.run()){check_and_stop();};
@@ -273,10 +273,15 @@ Serial.println("Programming is done!");
     while(stepper3.run()){check_and_stop();};
     stepper3.moveTo(godata_X[4]);
     while(stepper3.run()){check_and_stop();};
+
+    while(stepper1.run()){check_and_stop();};
+    stepper1.moveTo(godata_Y[4]);
+    while(stepper1.run()){check_and_stop();};
     
-   while(stepper2.run()){check_and_stop();};
+    while(stepper2.run()){check_and_stop();};
     stepper2.moveTo(godata_Z[2]);
     while(stepper2.run()){check_and_stop();};
+
 
     while(stepper3.run()){check_and_stop();};
     stepper3.moveTo(godata_X[5]);
@@ -289,6 +294,10 @@ Serial.println("Programming is done!");
     while(stepper3.run()){check_and_stop();};
     stepper3.moveTo(godata_X[5]);
     while(stepper3.run()){check_and_stop();};
+    
+    while(stepper2.run()){check_and_stop();};
+    stepper2.moveTo(godata_Z[1]);
+    while(stepper2.run()){check_and_stop();};
  
  
     while(stepper1.run()){check_and_stop();};
@@ -308,7 +317,7 @@ Serial.println("Programming is done!");
     while(stepper1.run()){check_and_stop();};
 
     while(stepper2.run()){check_and_stop();};
-    stepper2.moveTo(godata_Z[1]);
+    stepper2.moveTo(godata_Z[0]);
     while(stepper2.run()){check_and_stop();};
 
 
