@@ -1,5 +1,27 @@
 
 #include <AccelStepper.h>
+#include <EEPROM.h>
+
+int a = 0;
+int value;
+/*
+void setup()
+{
+  Serial.begin(9600);
+}
+void loop()
+{
+  value = EEPROM.read(a);
+  Serial.print(a);
+  Serial.print("\t");
+  Serial.print(value);
+  Serial.println();
+  a = a + 1;
+  if (a == 512)
+    a = 0;
+  delay(500);
+}
+*/
 
 // Define the stepper motor and the pins that is connected to
 AccelStepper stepper1(1, 2, 5); // (Type of driver: with 2 pins, STEP, DIR)
@@ -68,12 +90,112 @@ int readInt(void){
   return readIntValue;
 }
 
+char yes_no_dialog(void)
+{
+  char answer = 'n';
+  char dummy1 = 0;
+  Serial.println("Yes or No? Enter Y/N ");
+  while (Serial.available()==0){}
+  answer = Serial.read();
+  if(answer == 'Y' || answer == 'y'){
+    Serial.println("Answer Yes");
+  }
+  else
+  {
+    Serial.println("Answer No");
+  }
+  while (Serial.available()==0){}
+  dummy1 = Serial.read();
+  return answer;
+}
+void read_EEPROM_cord(void){
+  int num = 0; // Assume this is the number we want to store in the EEPROM
+  byte lowByte_x = 0; // Get the low byte of the integer
+  byte highByte_x = 0; // Get the high byte of the integer
+
+  Serial.println("Read EEPROM data to cordinates");
+  for(int i=0;i<p_step;i++){
+  lowByte_x = EEPROM.read(i*6);
+  highByte_x = EEPROM.read(i*6+1);
+  // Combine the low and high bytes into an integer
+  num = (highByte_x << 8) | lowByte_x;
+  godata_X[i] = num;
+  lowByte_x = EEPROM.read(i*6+2);
+  highByte_x = EEPROM.read(i*6+3);
+  // Combine the low and high bytes into an integer
+  num = (highByte_x << 8) | lowByte_x;
+  godata_Y[i] = num;
+  lowByte_x = EEPROM.read(i*6+4);
+  highByte_x = EEPROM.read(i*6+5);
+  // Combine the low and high bytes into an integer
+  num = (highByte_x << 8) | lowByte_x;
+  godata_Z[i] = num;
+  }
+}
+
+void write_EEPROM_cord(void){
+  int num = 0; // Assume this is the number we want to store in the EEPROM
+  byte lowByte_x = 0; // Get the low byte of the integer
+  byte highByte_x = 0; // Get the high byte of the integer
+  Serial.println("Write EEPROM data to cordinates");
+  for(int i=0;i<p_step;i++){
+  num = godata_X[i];
+  lowByte_x  = num & 0xFF; // Get the low byte of the integer  
+  highByte_x = (num >> 8) & 0xFF; // Get the high byte of the integer
+  EEPROM.write(i*6, lowByte_x);
+  EEPROM.write(i*6+1, highByte_x);
+  num = godata_Y[i];
+  lowByte_x  = num & 0xFF; // Get the low byte of the integer  
+  highByte_x = (num >> 8) & 0xFF; // Get the high byte of the integer
+  EEPROM.write(i*6+2, lowByte_x);
+  EEPROM.write(i*6+3, highByte_x);
+  num = godata_Z[i];
+  lowByte_x  = num & 0xFF; // Get the low byte of the integer  
+  highByte_x = (num >> 8) & 0xFF; // Get the high byte of the integer
+  EEPROM.write(i*6+4, lowByte_x);
+  EEPROM.write(i*6+5, highByte_x);
+  }
+}
+
+void print_prog_step(void){
+    Serial.println("Note that Z points is only use index 0..2 ");
+      for(int i=0;i<p_step;i++){
+    Serial.print("Programming X, Y, Z point number :");
+    Serial.print(i);
+    Serial.println();
+    Serial.print("X point = ");
+    Serial.print(godata_X[i]);
+    Serial.println();
+    Serial.print("Y point = ");
+    Serial.print(godata_Y[i]);
+    Serial.println();
+    Serial.print("Z point = ");
+    Serial.print(godata_Z[i]);
+    Serial.println();
+  
+    }
+}
 
 void loop() {
-   char dummy=0;
-   Serial.println("");
+
+  char dummy=0;
+
+  
+  
+  Serial.println("");
   Serial.println("Aluminium folding robot ");
-   Serial.println("");
+  Serial.println("");
+
+
+  read_EEPROM_cord();
+  Serial.println("Program cordinate from EEPROM memory is this ");
+  print_prog_step();
+  Serial.println("Do you want to change this cordinate ? ");
+  int answer = yes_no_dialog();
+
+if(answer == 'Y' || answer == 'y'){
+    
+
   for(int i=0;i<p_step;i++){
     Serial.print("Set programming X, Y point number :");
     Serial.print(i);
@@ -194,24 +316,30 @@ if(i<3){
 
   }
 
-Serial.println("Programming is done!");
-    for(int i=0;i<p_step;i++){
-    Serial.print("Programming X, Y point number :");
-    Serial.print(i);
-    Serial.println();
-    Serial.print("X point = ");
-    
-    Serial.print(godata_X[i]);
-    Serial.println();
-    Serial.print("Y point = ");
-    Serial.print(godata_Y[i]);
-    Serial.println();
-    Serial.print("Z point = ");
-    Serial.print(godata_Z[i]);
-    Serial.println();
-   
+    Serial.println("Programming is done!");
+    write_EEPROM_cord();
+    print_prog_step();
+}
+else
+{
+  Serial.println("Do you want to start the robot now ? ");
+  int start = 0;
+  while(start == 0)
+  {
+  answer = yes_no_dialog();
+  if(answer == 'Y' || answer == 'y'){
+      start = 1;
     }
+    else
+    {
+      start = 0;
+      Serial.println("Do you want to start the robot now ? ");
+    }
+  }
+}
 
+
+    Serial.println("Go to start point now");
     while(stepper2.run()){check_and_stop();};
     stepper2.moveTo(godata_Z[0]);
     while(stepper2.run()){check_and_stop();};
@@ -225,8 +353,6 @@ Serial.println("Programming is done!");
     while(stepper1.run()){check_and_stop();};
     Serial.println("Start");
 
-  
- 
     while(stepper2.run()){check_and_stop();};
     stepper2.moveTo(godata_Z[0]);
     while(stepper2.run()){check_and_stop();};
