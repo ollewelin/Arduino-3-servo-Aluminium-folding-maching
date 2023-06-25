@@ -1,0 +1,47 @@
+Programming is done!
+Write EEPROM data to cordinates
+Note that Z points is only use index 0..2 
+Programming X, Y, Z point number :0
+X point = 0
+Y point = 0
+Z point = 0
+Programming X, Y, Z point number :1
+X point = 5500
+Y point = 1
+Z point = 1800
+Programming X, Y, Z point number :2
+X point = 5500
+Y point = -3000
+Z point = 2020
+Programming X, Y, Z point number :3
+X point = 5500
+Y point = 1
+Z point = 1
+Programming X, Y, Z point number :4
+X point = 1
+Y point = 1
+Z point = 6000
+Programming X, Y, Z point number :5
+X point = 1
+Y point = -6000
+Z point = 6000
+Programming X, Y, Z point number :6
+X point = 5500
+Y point = -6000
+Z point = 6000
+Programming X, Y, Z point number :7
+X point = 5500
+Y point = -3000
+Z point = 1
+Programming X, Y, Z point number :8
+X point = 5500
+Y point = -6000
+Z point = -6000
+Programming X, Y, Z point number :9
+X point = 1
+Y point = -6000
+Z point = -16317
+Go to start point now
+Start
+Start
+
