@@ -1,47 +1,49 @@
-Programming is done!
-Write EEPROM data to cordinates
+Aluminium folding robot 
+
+Read EEPROM data to cordinates
+Program cordinate from EEPROM memory is this 
 Note that Z points is only use index 0..2 
 Programming X, Y, Z point number :0
 X point = 0
 Y point = 0
 Z point = 0
 Programming X, Y, Z point number :1
-X point = 5500
+X point = 6000
 Y point = 1
-Z point = 1800
+Z point = 900
 Programming X, Y, Z point number :2
-X point = 5500
-Y point = -3000
-Z point = 2020
+X point = 6000
+Y point = -4000
+Z point = 1100
 Programming X, Y, Z point number :3
-X point = 5500
+X point = 6000
 Y point = 1
-Z point = 1
+Z point = 1600
 Programming X, Y, Z point number :4
 X point = 1
 Y point = 1
-Z point = 6000
+Z point = 1600
 Programming X, Y, Z point number :5
 X point = 1
-Y point = -6000
-Z point = 6000
+Y point = -7000
+Z point = 1600
 Programming X, Y, Z point number :6
-X point = 5500
-Y point = -6000
-Z point = 6000
+X point = 6000
+Y point = -7000
+Z point = 1600
 Programming X, Y, Z point number :7
-X point = 5500
-Y point = -3000
-Z point = 1
+X point = 6000
+Y point = -2000
+Z point = 1600
 Programming X, Y, Z point number :8
-X point = 5500
-Y point = -6000
-Z point = -6000
+X point = 6000
+Y point = -7000
+Z point = 1600
 Programming X, Y, Z point number :9
-X point = 1
-Y point = -6000
-Z point = -16317
-Go to start point now
-Start
-Start
+X point = -200
+Y point = -7000
+Z point = 1600
+Do you want to change this cordinate ? 
+Yes or No? Enter Y/N 
+
 
