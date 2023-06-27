@@ -275,7 +275,7 @@ if(answer == 'Y' || answer == 'y'){
   Serial.println();
   godata_Y[i] = startY;
 //
-//if(i<3){
+if(i<3){
 // set Z point 
   int old_startZ =0;
   Serial.println("Set Z start pos value +/-32767 ");
@@ -311,7 +311,7 @@ if(answer == 'Y' || answer == 'y'){
   Serial.println();
   godata_Z[i] = startZ;
 //
-//}
+}
 
 
   }
